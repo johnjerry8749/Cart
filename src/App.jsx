@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Productpage from "./Productpage";
-import CartPage from "./CartPage";
+import productsData from "../data.json"; // Direct import of JSON fil
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    fetch('./data.json')
-      .then(response => response.json())
-      .then(data => setProducts(data.map(product => ({
-        ...product,
-        showAddButton: true,
-        quantity: 1
-      }))))
-      .catch(error => console.error("Fetch error:", error));
+    // Use the imported data directly
+    setProducts(productsData.map(product => ({
+      ...product,
+      showAddButton: true,
+      quantity: 1
+    })));
   }, []);
 
  const handleAddToCart = (productId) => {
